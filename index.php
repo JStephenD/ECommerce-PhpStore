@@ -5,14 +5,11 @@ session_start();
 
 function loadClasses($class) {
 	$dirs = [
-		__DIR__ . '/controllers/',
+		__DIR__ . '/controllers/', $_SERVER['DOCUMENT_ROOT'] . '/controllers/',
 
-		__DIR__ . '/models/',
-		__DIR__ . '/models/logging/',
+		__DIR__ . '/models/', $_SERVER['DOCUMENT_ROOT'] . '/models/',
 
-		__DIR__ . '/classes/',
-
-		__DIR__ . '/ajaj/',
+		__DIR__ . '/classes/', $_SERVER['DOCUMENT_ROOT'] . '/classes/',
 	];
 
 	foreach ($dirs as $dir) {
@@ -26,7 +23,9 @@ function loadClasses($class) {
 }
 
 spl_autoload_register('loadClasses');
-require 'vendor/autoload.php';
+require $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
+
+new Store();
 
 
 if (file_exists($_SERVER['DOCUMENT_ROOT'] . '/.env')) {
