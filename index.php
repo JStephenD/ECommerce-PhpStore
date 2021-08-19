@@ -75,7 +75,10 @@ $uri = rawurldecode($uri);
 
 			break;
 		case FastRoute\Dispatcher::FOUND:
-			$db = Connection::connect();
+			try {
+				$db = Connection::connect();
+			} catch (Exception $e) {
+			}
 			$classname = $routeInfo[1][0];
 			$method = $routeInfo[1][1];
 
