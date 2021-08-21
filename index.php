@@ -77,6 +77,7 @@ $uri = rawurldecode($uri);
 			try {
 				$db = Connection::connect();
 			} catch (Exception $e) {
+				echo "Error in connection $e";
 			}
 			$classname = $routeInfo[1][0];
 			$method = $routeInfo[1][1];
