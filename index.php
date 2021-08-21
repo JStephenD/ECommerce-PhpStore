@@ -25,8 +25,6 @@ function loadClasses($class) {
 spl_autoload_register('loadClasses');
 require $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
 
-new Store();
-
 
 if (file_exists($_SERVER['DOCUMENT_ROOT'] . '/.env')) {
 	$dotenv = Dotenv\Dotenv::createImmutable($_SERVER['DOCUMENT_ROOT'], '/.env');
