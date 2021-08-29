@@ -210,7 +210,6 @@ tramp
 
 # cask packages
 .cask/
-dist/
 
 # Flycheck
 flycheck_*.el
@@ -284,9 +283,7 @@ tmtags
 **/nbproject/private/
 **/nbproject/Makefile-*.mk
 **/nbproject/Package-*.bash
-build/
 nbbuild/
-dist/
 nbdist/
 .nb-gradle/
 
@@ -442,7 +439,6 @@ config.codekit3
 
 ##### Gradle
 .gradle
-**/build/
 !src/**/build/
 
 # Ignore Gradle GUI config
