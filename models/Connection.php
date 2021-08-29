@@ -18,13 +18,19 @@ class Connection {
             $link = new PDO(
                 "{$scheme}:host={$host};dbname={$dbname}",
                 $username,
-                $password
+                $password,
+                array(PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING)
             );
             $link->exec("set names utf8");
 
             return $link;
         } else {
-            $link = new PDO("mysql:host=localhost;dbname=phpstore", "root", "");
+            $link = new PDO(
+                "mysql:host=localhost;dbname=phpstore",
+                "root",
+                "",
+                array(PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING)
+            );
             $link->exec("set names utf8");
 
             return $link;

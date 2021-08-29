@@ -22,6 +22,7 @@ function loadClasses($class) {
 	}
 }
 
+
 spl_autoload_register('loadClasses');
 require $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
 
@@ -38,6 +39,12 @@ $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) 
 	$r->addRoute(['GET', 'POST'], '/shopping-cart', ['Store', 'shopping_cart']);
 	$r->addRoute(['GET', 'POST'], '/blog', ['Store', 'blog']);
 	$r->addRoute(['GET', 'POST'], '/contact', ['Store', 'contact']);
+
+	$r->addRoute(['GET', 'POST'], '/admin', ['Admin', 'index']);
+	$r->addRoute(['GET', 'POST'], '/admin/login', ['Admin', 'login']);
+	$r->addRoute(['GET', 'POST'], '/admin/logout', ['Admin', 'logout']);
+	$r->addRoute(['GET', 'POST'], '/admin/categories', ['Admin', 'categories']);
+	$r->addRoute(['GET', 'POST'], '/admin/products', ['Admin', 'products']);
 });
 
 // Fetch method and URI from somewhere
@@ -50,73 +57,35 @@ if (false !== $pos = strpos($uri, '?')) {
 }
 $uri = rawurldecode($uri);
 
-?>
 
-<!DOCTYPE html>
-<html lang="en">
+$routeInfo = $dispatcher->dispatch($httpMethod, $uri);
+switch ($routeInfo[0]) {
+	case FastRoute\Dispatcher::NOT_FOUND:
 
-<body class="animsition">
-	<?php
+		echo 'not found';
 
-	$routeInfo = $dispatcher->dispatch($httpMethod, $uri);
-	switch ($routeInfo[0]) {
-		case FastRoute\Dispatcher::NOT_FOUND:
+		break;
+	case FastRoute\Dispatcher::METHOD_NOT_ALLOWED:
+		$allowedMethods = $routeInfo[1];
 
-			echo 'not found';
+		echo 'method not allowed';
 
-			break;
-		case FastRoute\Dispatcher::METHOD_NOT_ALLOWED:
-			$allowedMethods = $routeInfo[1];
+		break;
+	case FastRoute\Dispatcher::FOUND:
+		try {
+			$db = Connection::connect();
+		} catch (Exception $e) {
+			echo "Error in connection $e";
+		}
+		$classname = $routeInfo[1][0];
+		$method = $routeInfo[1][1];
 
-			echo 'method not allowed';
+		$vars = $routeInfo[2];
+		$vars['db'] = $db;
 
-			break;
-		case FastRoute\Dispatcher::FOUND:
-			try {
-				$db = Connection::connect();
-			} catch (Exception $e) {
-				echo "Error in connection $e";
-			}
-			$classname = $routeInfo[1][0];
-			$method = $routeInfo[1][1];
+		$class = new $classname();
+		call_user_func_array([$class, $method], [$vars, $httpMethod]);
 
-			$vars = $routeInfo[2];
-
-			// HEADER
-			if ($httpMethod == 'GET') {
-				$_SESSION['TITLE'] = $method;
-
-				require_once($_SERVER['DOCUMENT_ROOT'] . "/includes/head.php");
-
-				if ($method == "index") {
-					require_once($_SERVER['DOCUMENT_ROOT'] . "/includes/header.php");
-				} else {
-					require_once($_SERVER['DOCUMENT_ROOT'] . "/includes/header2.php");
-				}
-
-				require_once($_SERVER['DOCUMENT_ROOT'] . "/includes/cart.php");
-			}
-
-			$class = new $classname();
-			call_user_func_array([$class, $method], [$vars, $httpMethod]);
-
-			// FOOTER
-			if ($httpMethod == 'GET') {
-				require_once($_SERVER['DOCUMENT_ROOT'] . "/includes/footer.php");
-				require_once($_SERVER['DOCUMENT_ROOT'] . "/includes/backtotop.php");
-				require_once($_SERVER['DOCUMENT_ROOT'] . "/includes/modal1.php");
-				require_once($_SERVER['DOCUMENT_ROOT'] . "/includes/scripts.php");
-			}
-
-			break;
-	}
-	?>
-</body>
-
-</html>
-
-<?php
-
+		break;
+}
 ob_end_flush();
-
-?>

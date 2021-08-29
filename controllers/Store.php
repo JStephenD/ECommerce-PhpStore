@@ -1,26 +1,66 @@
 <?php
+
 class Store {
+
+    function wrap($include_file, $title = 'Home') {
+        echo `<!DOCTYPE html>
+        <html lang="en">`;
+
+        $_SESSION['TITLE'] = $title;
+        require_once($_SERVER['DOCUMENT_ROOT'] . "/includes/store/head.php");
+
+        echo `<body class="animsition">`;
+
+        if ($title == "Home") {
+            require_once($_SERVER['DOCUMENT_ROOT'] . "/includes/store/header.php");
+        } else {
+            require_once($_SERVER['DOCUMENT_ROOT'] . "/includes/store/header2.php");
+        }
+
+        require_once($_SERVER['DOCUMENT_ROOT'] . "/includes/store/cart.php");
+
+        require_once($_SERVER['DOCUMENT_ROOT'] . $include_file);
+
+        require_once($_SERVER['DOCUMENT_ROOT'] . "/includes/store/footer.php");
+        require_once($_SERVER['DOCUMENT_ROOT'] . "/includes/store/backtotop.php");
+        require_once($_SERVER['DOCUMENT_ROOT'] . "/includes/store/modal1.php");
+        require_once($_SERVER['DOCUMENT_ROOT'] . "/includes/store/scripts.php");
+
+        echo `</body></html>`;
+    }
+
     function index($vars, $httpmethod) {
-        require_once($_SERVER['DOCUMENT_ROOT'] . '/views/store_index.php');
+        $this->wrap('/views/store/store_index.php', 'Home');
     }
 
     function about($vars, $httpmethod) {
-        require_once($_SERVER['DOCUMENT_ROOT'] . '/views/store_about.php');
+        $this->wrap('/views/store/store_about.php', 'About Store');
     }
 
     function product($vars, $httpmethod) {
-        require_once($_SERVER['DOCUMENT_ROOT'] . '/views/store_product.php');
+        $this->wrap('/views/store/store_product.php', 'Products');
     }
 
     function shopping_cart($vars, $httpmethod) {
-        require_once($_SERVER['DOCUMENT_ROOT'] . '/views/store_shopping_cart.php');
+        $this->wrap('/views/store/store_shopping_cart.php', 'Your Cart');
     }
 
     function blog($vars, $httpmethod) {
-        require_once($_SERVER['DOCUMENT_ROOT'] . '/views/store_blog.php');
+        $this->wrap('/views/store/store_blog.php', 'Blog');
     }
 
     function contact($vars, $httpmethod) {
-        require_once($_SERVER['DOCUMENT_ROOT'] . '/views/store_contact.php');
+        if ($httpmethod == 'GET') {
+            $this->wrap('/views/store/store_contact.php', 'Contact Us!');
+        } else {
+            $data = array(
+                "email" => $_POST['email'],
+                "message" => $_POST['message']
+            );
+            $contact = new Contact($vars['db']);
+            $result = $contact->add($data);
+
+            sleep(.5);
+        }
     }
 }
