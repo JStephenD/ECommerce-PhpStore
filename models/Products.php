@@ -6,6 +6,21 @@ class Products {
         $this->table = $table;
     }
 
+    function get($id = 0) {
+        if ($id == 0) {
+            $query = $this->db->prepare("SELECT * FROM $this->table");
+            $query->execute();
+            return $query->fetchAll(PDO::FETCH_ASSOC);
+        } else {
+            $query = $this->db->prepare(
+                "
+                SELECT * FROM $this->table WHERE id = :id"
+            );
+            $query->execute(['id' => $id]);
+            return $query->fetchAll(PDO::FETCH_ASSOC);
+        }
+    }
+
     function add($data) {
         $query = $this->db->prepare(
             "INSERT INTO 
@@ -24,6 +39,20 @@ class Products {
                 :picture,
                 :category_id
             )"
+        );
+        $query->execute($data);
+        $query = null;
+    }
+
+    function update($data) {
+        $query = $this->db->prepare(
+            "UPDATE $this->table SET
+                name = :name,
+                price = :price,
+                description = :description,
+                picture = :picture,
+                category_id = :category_id
+            WHERE id = :id"
         );
         $query->execute($data);
         $query = null;
