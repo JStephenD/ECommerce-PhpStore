@@ -46,11 +46,11 @@ class Admin {
         }
     }
 
-    function products($vars, $httpmethod) {
+    function products_add($vars, $httpmethod) {
         if ($httpmethod == "GET") {
             $category = new Categories($vars['db']);
             $categories = $category->get();
-            $this->wrap('/views/admin/admin_products.php', 'ADMIN - PRODUCTS', ['categories' => $categories]);
+            $this->wrap('/views/admin/admin_products_add.php', 'ADMIN - PRODUCTS', ['categories' => $categories]);
         } else {
             $imgFileName = Utils::save_image('uploads/product_picture/', 'picture');
 
@@ -122,6 +122,18 @@ class Admin {
         }
     }
 
+    function products_delete($vars, $httpmethod) {
+        if ($httpmethod == 'POST') {
+            $data = array(
+                "id" => $_POST['id']
+            );
+
+            $P = new Products($vars['db']);
+            $result = $P->delete($data);
+            sleep(.5);
+        }
+    }
+
     function login($vars, $httpmethod) {
         if ($httpmethod == "GET") {
             echo `<!DOCTYPE html><html>`;
@@ -132,6 +144,7 @@ class Admin {
             echo `<body class="hold-transition skin-blue sidebar-mini">`;
 
             require_once($_SERVER['DOCUMENT_ROOT'] . '/includes/admin/header.php');
+            require_once($_SERVER['DOCUMENT_ROOT'] . '/includes/admin/main-sidebar.php');
 
             require_once($_SERVER['DOCUMENT_ROOT'] . '/views/admin/admin_login.php');
 

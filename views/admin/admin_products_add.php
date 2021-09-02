@@ -58,6 +58,10 @@
                             <button type="submit" class="btn btn-primary" id="submit">Submit</button>
                         </div>
                     </form>
+
+                    <a href="/admin/products/list">
+                        <button style="color:green">Back to List</button>
+                    </a>
                 </div>
 
                 <div class="col-sm-3"></div>
@@ -66,4 +70,4 @@
     </div>
 </div>
 
-<script defer="defer" src="/js/admin/products.js"></script>
+<script defer="defer" src="/js/admin/products-add.js"></script>

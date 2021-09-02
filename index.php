@@ -43,12 +43,14 @@ $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) 
 	$r->addRoute(['GET', 'POST'], '/admin', ['Admin', 'index']);
 	$r->addRoute(['GET', 'POST'], '/admin/login', ['Admin', 'login']);
 	$r->addRoute(['GET', 'POST'], '/admin/logout', ['Admin', 'logout']);
+
 	$r->addRoute(['GET', 'POST'], '/admin/categories', ['Admin', 'categories']);
 
-	$r->addRoute(['GET', 'POST'], '/admin/products', ['Admin', 'products']);
+	$r->addRoute(['GET', 'POST'], '/admin/products/add', ['Admin', 'products_add']);
 	$r->addRoute(['GET', 'POST'], '/admin/products/list', ['Admin', 'products_list']);
 	$r->addRoute(['GET', 'POST'], '/admin/products/list/{id}', ['Admin', 'products_id']);
 	$r->addRoute(['GET', 'POST'], '/admin/products/update/{id}', ['Admin', 'products_update']);
+	$r->addRoute(['GET', 'POST'], '/admin/products/delete/{id}', ['Admin', 'products_delete']);
 });
 
 // Fetch method and URI from somewhere

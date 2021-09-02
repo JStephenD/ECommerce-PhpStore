@@ -57,4 +57,12 @@ class Products {
         $query->execute($data);
         $query = null;
     }
+
+    function delete($data) {
+        $query = $this->db->prepare(
+            "DELETE FROM $this->table WHERE id = :id"
+        );
+        $query->execute($data);
+        $query = null;
+    }
 }

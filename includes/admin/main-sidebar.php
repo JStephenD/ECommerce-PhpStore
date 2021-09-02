@@ -39,6 +39,12 @@
             </li> -->
 
             <li>
+                <a href="/admin">
+                    <i class="fa fa-th"></i> <span>Home</span>
+                </a>
+            </li>
+
+            <li>
                 <a href="/admin/categories">
                     <i class="fa fa-th"></i> <span>Categories</span>
                     <span class="pull-right-container">
@@ -60,11 +66,13 @@
                     <li><a href="/admin/products"><i class="fa fa-circle-o"></i> Add Product</a></li>
                 </ul>
             </li>
-            <li>
-                <a href="/admin/logout">
-                    <i class="fa fa-th"></i> <span>Logout</span>
-                </a>
-            </li>
+            <?php if (isset($_SESSION['admin'])) { ?>
+                <li>
+                    <a href="/admin/logout">
+                        <i class="fa fa-th"></i> <span>Logout</span>
+                    </a>
+                </li>
+            <?php } ?>
         </ul>
     </section>
     <!-- /.sidebar -->
