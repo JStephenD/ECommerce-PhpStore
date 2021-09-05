@@ -36,6 +36,7 @@ $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) 
 	$r->addRoute(['GET', 'POST'], '/', ['Store', 'index']);
 	$r->addRoute(['GET', 'POST'], '/about', ['Store', 'about']);
 	$r->addRoute(['GET', 'POST'], '/product', ['Store', 'product']);
+	$r->addRoute(['GET', 'POST'], '/product/details/{id}', ['Store', 'product_details']);
 	$r->addRoute(['GET', 'POST'], '/shopping-cart', ['Store', 'shopping_cart']);
 	$r->addRoute(['GET', 'POST'], '/blog', ['Store', 'blog']);
 	$r->addRoute(['GET', 'POST'], '/contact', ['Store', 'contact']);
@@ -88,6 +89,8 @@ switch ($routeInfo[0]) {
 
 		$vars = $routeInfo[2];
 		$vars['db'] = $db;
+		$vars['classname'] = $classname;
+		$vars['method'] = $method;
 
 		$class = new $classname();
 		call_user_func_array([$class, $method], [$vars, $httpMethod]);

@@ -29,6 +29,7 @@ class Products {
                 price,
                 description,
                 picture,
+                tag,
                 category_id
             )
             VALUES
@@ -37,6 +38,7 @@ class Products {
                 :price,
                 :description,
                 :picture,
+                :tag,
                 :category_id
             )"
         );
@@ -51,6 +53,7 @@ class Products {
                 price = :price,
                 description = :description,
                 picture = :picture,
+                tag = :tag,
                 category_id = :category_id
             WHERE id = :id"
         );
@@ -64,5 +67,11 @@ class Products {
         );
         $query->execute($data);
         $query = null;
+    }
+
+    function get_tags() {
+        $query = $this->db->prepare("SELECT DISTINCT tag FROM $this->table");
+        $query->execute();
+        return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 }

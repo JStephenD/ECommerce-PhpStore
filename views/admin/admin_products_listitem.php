@@ -26,6 +26,8 @@
             <hr \>
             <h3><?= 'Description: ' . $product['description']; ?></h3>
             <hr \>
+            <h3><?= 'Tag: ' . $product['tag']; ?></h3>
+            <hr \>
 
             <div class="row">
                 <div class="col-sm-2">

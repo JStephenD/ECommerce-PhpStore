@@ -29,12 +29,12 @@ class Admin {
     }
 
     function index($vars, $httpmethod) {
-        $this->wrap('/views/admin/admin_index.php', 'ADMIN');
+        $this->wrap('/views/admin/admin_index.php', 'ADMIN', $vars);
     }
 
     function categories($vars, $httpmethod) {
         if ($httpmethod == "GET") {
-            $this->wrap('/views/admin/admin_categories.php', 'ADMIN - CATEGORIES');
+            $this->wrap('/views/admin/admin_categories.php', 'ADMIN - CATEGORIES', $vars);
         } else {
             $data = array(
                 "name" => $_POST['name']
@@ -49,8 +49,8 @@ class Admin {
     function products_add($vars, $httpmethod) {
         if ($httpmethod == "GET") {
             $category = new Categories($vars['db']);
-            $categories = $category->get();
-            $this->wrap('/views/admin/admin_products_add.php', 'ADMIN - PRODUCTS', ['categories' => $categories]);
+            $vars['categories'] = $category->get();
+            $this->wrap('/views/admin/admin_products_add.php', 'ADMIN - PRODUCTS', $vars);
         } else {
             $imgFileName = Utils::save_image('uploads/product_picture/', 'picture');
 
@@ -59,6 +59,7 @@ class Admin {
                 "description" => $_POST['description'],
                 "price" => $_POST['price'],
                 "picture" => $imgFileName,
+                "tag" => $_POST['tag'],
                 "category_id" => $_POST['category_id']
             );
             $product = new Products($vars['db']);
@@ -71,8 +72,8 @@ class Admin {
     function products_list($vars, $httpmethod) {
         if ($httpmethod == 'GET') {
             $P = new Products($vars['db']);
-            $products = $P->get();
-            $this->wrap('/views/admin/admin_products_list.php', 'ADMIN - PRODUCTS LISTING', ['products' => $products]);
+            $vars['products'] = $P->get();
+            $this->wrap('/views/admin/admin_products_list.php', 'ADMIN - PRODUCTS LISTING', $vars);
         } else {
         }
     }
@@ -81,8 +82,8 @@ class Admin {
         if ($httpmethod == 'GET') {
             $id = $vars['id'];
             $P = new Products($vars['db']);
-            $product = $P->get($id)[0];
-            $this->wrap('/views/admin/admin_products_listitem.php', 'ADMIN - PRODUCT ITEM', ['product' => $product]);
+            $vars['product'] = $P->get($id)[0];
+            $this->wrap('/views/admin/admin_products_listitem.php', 'ADMIN - PRODUCT ITEM', $vars);
         } else {
         }
     }
@@ -92,18 +93,16 @@ class Admin {
             $id = $vars['id'];
             $P = new Products($vars['db']);
             $C = new Categories($vars['db']);
-            $product = $P->get($id)[0];
-            $categories = $C->get();
-            $this->wrap('/views/admin/admin_products_update.php', 'ADMIN - UPDATE PRODUCT', [
-                'product' => $product,
-                'categories' => $categories
-            ]);
+            $vars['product'] = $P->get($id)[0];
+            $vars['categories'] = $C->get();
+            $this->wrap('/views/admin/admin_products_update.php', 'ADMIN - UPDATE PRODUCT', $vars);
         } else {
             $data = array(
                 "id" => $_POST['id'],
                 "name" => $_POST['name'],
                 "price" => $_POST['price'],
                 "description" => $_POST['description'],
+                "tag" => $_POST['tag'],
                 "category_id" => $_POST['category_id'],
             );
 
@@ -136,6 +135,11 @@ class Admin {
 
     function login($vars, $httpmethod) {
         if ($httpmethod == "GET") {
+
+            foreach ($vars as $k => $v) {
+                $$k = $v;
+            }
+
             echo `<!DOCTYPE html><html>`;
 
             $_SESSION['TITLE'] = "ADMIN - LOGIN";

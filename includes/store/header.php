@@ -2,7 +2,7 @@
 	<!-- Header desktop -->
 	<div class="container-menu-desktop">
 		<!-- Topbar -->
-		<div class="top-bar">
+		<!-- <div class="top-bar">
 			<div class="content-topbar flex-sb-m h-full container">
 				<div class="left-top-bar">
 					Free shipping for standard order over $100
@@ -26,7 +26,7 @@
 					</a>
 				</div>
 			</div>
-		</div>
+		</div> -->
 
 		<div class="wrap-menu-desktop">
 			<nav class="limiter-menu-desktop container">
@@ -41,11 +41,11 @@
 					<ul class="main-menu">
 						<li class="<?= (in_array($method, ['index'])) ? 'active-menu' : ''; ?>">
 							<a href="/">Home</a>
-							<ul class="sub-menu">
+							<!-- <ul class="sub-menu">
 								<li><a href="/">Homepage 1</a></li>
 								<li><a href="/home-02">Homepage 2</a></li>
 								<li><a href="/home-03">Homepage 3</a></li>
-							</ul>
+							</ul> -->
 						</li>
 
 						<li class="<?= ($method == "product") ? 'active-menu' : ''; ?>">
@@ -127,7 +127,7 @@
 
 	<!-- Menu Mobile -->
 	<div class="menu-mobile">
-		<ul class="topbar-mobile">
+		<!-- <ul class="topbar-mobile">
 			<li>
 				<div class="left-top-bar">
 					Free shipping for standard order over $100
@@ -153,19 +153,19 @@
 					</a>
 				</div>
 			</li>
-		</ul>
+		</ul> -->
 
 		<ul class="main-menu-m">
 			<li>
 				<a href="/">Home</a>
-				<ul class="sub-menu-m">
+				<!-- <ul class="sub-menu-m">
 					<li><a href="/">Homepage 1</a></li>
 					<li><a href="/home-02">Homepage 2</a></li>
 					<li><a href="/home-03">Homepage 3</a></li>
 				</ul>
 				<span class="arrow-main-menu-m">
 					<i class="fa fa-angle-right" aria-hidden="true"></i>
-				</span>
+				</span> -->
 			</li>
 
 			<li>

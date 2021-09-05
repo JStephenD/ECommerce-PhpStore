@@ -41,6 +41,10 @@
                                 <textarea class="form-control" name="description"><?= $product['description']; ?></textarea>
                             </div>
                             <div class="form-group">
+                                <label for="tag">Tag</label>
+                                <input type="text" class="form-control" name="tag" placeholder="tag" value="<?= $product['tag']; ?>">
+                            </div>
+                            <div class="form-group">
                                 <label for="picture">Picture</label>
                                 <input type="text" value="false" name="imageChanged" hidden>
                                 <input type="text" name="original_picture" value="<?= $product['picture']; ?>" hidden>

@@ -1,4 +1,4 @@
-<section class="bg-img1 txt-center p-lr-15 p-tb-92" style="background-image: url('/images/bg-01.jpg');">
+<section class="bg-img1 txt-center p-lr-15 p-tb-92" style="background-image: url('images/kitchenware/about-bg-01.webp');">
     <h2 class="ltext-105 cl0 txt-center">
         Contact
     </h2>
@@ -40,7 +40,7 @@
                         </span>
 
                         <p class="stext-115 cl6 size-213 p-t-18">
-                            Coza Store Center 8th floor, 379 Hudson St, New York, NY 10018 US
+                            #69 420 Avenue, Nibba City, Philippines 6100
                         </p>
                     </div>
                 </div>
@@ -56,7 +56,7 @@
                         </span>
 
                         <p class="stext-115 cl1 size-213 p-t-18">
-                            +1 800 1236879
+                            +63 9 99 888 7777
                         </p>
                     </div>
                 </div>
@@ -72,7 +72,7 @@
                         </span>
 
                         <p class="stext-115 cl1 size-213 p-t-18">
-                            contact@example.com
+                            myemail@youremail.com
                         </p>
                     </div>
                 </div>

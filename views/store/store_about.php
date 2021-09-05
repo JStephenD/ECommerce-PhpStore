@@ -1,5 +1,5 @@
 <!-- Title page -->
-<section class="bg-img1 txt-center p-lr-15 p-tb-92" style="background-image: url('/images/bg-01.jpg');">
+<section class="bg-img1 txt-center p-lr-15 p-tb-92" style="background-image: url('/images/kitchenware/about-bg-01.webp');">
     <h2 class="ltext-105 cl0 txt-center">
         About
     </h2>
@@ -17,15 +17,15 @@
                     </h3>
 
                     <p class="stext-113 cl6 p-b-26">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris consequat consequat enim, non auctor massa ultrices non. Morbi sed odio massa. Quisque at vehicula tellus, sed tincidunt augue. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Maecenas varius egestas diam, eu sodales metus scelerisque congue. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Maecenas gravida justo eu arcu egestas convallis. Nullam eu erat bibendum, tempus ipsum eget, dictum enim. Donec non neque ut enim dapibus tincidunt vitae nec augue. Suspendisse potenti. Proin ut est diam. Donec condimentum euismod tortor, eget facilisis diam faucibus et. Morbi a tempor elit.
+                        We started this company to share our ideas of new kitchen wares and provide you with the best products possible. Since 4/20/1738, we have grown so much because of the loyalty of the customers that wanted our products. Give us your money to keep us going afloat and procede with our plans of world expansion and domination through sheer willpower and ambition.
                     </p>
 
                     <p class="stext-113 cl6 p-b-26">
-                        Donec gravida lorem elit, quis condimentum ex semper sit amet. Fusce eget ligula magna. Aliquam aliquam imperdiet sodales. Ut fringilla turpis in vehicula vehicula. Pellentesque congue ac orci ut gravida. Aliquam erat volutpat. Donec iaculis lectus a arcu facilisis, eu sodales lectus sagittis. Etiam pellentesque, magna vel dictum rutrum, neque justo eleifend elit, vel tincidunt erat arcu ut sem. Sed rutrum, turpis ut commodo efficitur, quam velit convallis ipsum, et maximus enim ligula ac ligula.
+                        Our customers are very noble people, and we glorify them through giving them the best of services available in humankind. Even though we are from Mars, they gladly accompany us, shop with us, and talk with us. For the future customers of our shop, we highly recommend that you become part of our community as we are growing day by day. The community is very friendly and very outgoing, it is definitely a good idea to become a part of it.
                     </p>
 
                     <p class="stext-113 cl6 p-b-26">
-                        Any questions? Let us know in store at 8th floor, 379 Hudson St, New York, NY 10018 or call us on (+1) 96 716 6879
+                        Any questions? Let us know in store at {iplocator.com/house/&lt;ip>}, {iplocator.com/street/&lt;ip>}, {iplocator.com/countrycode/&lt;ip>} {iplocator.com/zipcode/&lt;ip>} or call us on (+1) 96 716 6879
                     </p>
                 </div>
             </div>
@@ -33,7 +33,7 @@
             <div class="col-11 col-md-5 col-lg-4 m-lr-auto">
                 <div class="how-bor1 ">
                     <div class="hov-img0">
-                        <img src="/images/about-01.jpg" alt="IMG">
+                        <img src="/images/kitchenware/about-bg-02.jpg" alt="IMG">
                     </div>
                 </div>
             </div>
@@ -47,16 +47,16 @@
                     </h3>
 
                     <p class="stext-113 cl6 p-b-26">
-                        Mauris non lacinia magna. Sed nec lobortis dolor. Vestibulum rhoncus dignissim risus, sed consectetur erat. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nullam maximus mauris sit amet odio convallis, in pharetra magna gravida. Praesent sed nunc fermentum mi molestie tempor. Morbi vitae viverra odio. Pellentesque ac velit egestas, luctus arcu non, laoreet mauris. Sed in ipsum tempor, consequat odio in, porttitor ante. Ut mauris ligula, volutpat in sodales in, porta non odio. Pellentesque tempor urna vitae mi vestibulum, nec venenatis nulla lobortis. Proin at gravida ante. Mauris auctor purus at lacus maximus euismod. Pellentesque vulputate massa ut nisl hendrerit, eget elementum libero iaculis.
+                        We are an Augustinian Recollect University that educates the mind and heart by providing the climate, the structure, and the means to develop the vocation, knowledge, skills, talents, and attitude of the community as permeated by the Gospel values for the service of humanity, love and praise to the One God.
                     </p>
 
                     <div class="bor16 p-l-29 p-b-9 m-t-22">
                         <p class="stext-114 cl6 p-r-40 p-b-11">
-                            Creativity is just connecting things. When you ask creative people how they did something, they feel a little guilty because they didn't really do it, they just saw something. It seemed obvious to them after a while.
+                            UNO-R is an Augustinian Recollect Center of Learning which makes knowledge (SCIENTIA) a structure of wisdom that leads one to the exercise of love (CARITAS).
                         </p>
 
                         <span class="stext-111 cl8">
-                            - Steve Job’s
+                            - UNO-R
                         </span>
                     </div>
                 </div>
@@ -65,7 +65,7 @@
             <div class="order-md-1 col-11 col-md-5 col-lg-4 m-lr-auto p-b-30">
                 <div class="how-bor2">
                     <div class="hov-img0">
-                        <img src="/images/about-02.jpg" alt="IMG">
+                        <img src="/images/kitchenware/about-bg-03.webp" alt="IMG">
                     </div>
                 </div>
             </div>

@@ -2,9 +2,13 @@
 
 class Store {
 
-    function wrap($include_file, $title = 'Home') {
-        echo `<!DOCTYPE html>
-        <html lang="en">`;
+    function wrap($include_file, $title = 'Home', $variables = []) {
+
+        foreach ($variables as $k => $v) {
+            $$k = $v;
+        }
+
+        echo `<!DOCTYPE html><html lang="en">`;
 
         $_SESSION['TITLE'] = $title;
         require_once($_SERVER['DOCUMENT_ROOT'] . "/includes/store/head.php");
@@ -30,28 +34,53 @@ class Store {
     }
 
     function index($vars, $httpmethod) {
-        $this->wrap('/views/store/store_index.php', 'Home');
+        if ($httpmethod == 'GET') {
+            $P = new Products($vars['db']);
+            $vars['products'] = $P->get();
+            $vars['tags'] = $P->get_tags();
+            $this->wrap('/views/store/store_index.php', 'Home', $vars);
+        }
     }
 
     function about($vars, $httpmethod) {
-        $this->wrap('/views/store/store_about.php', 'About Store');
+        $this->wrap('/views/store/store_about.php', 'About Store', $vars);
     }
 
     function product($vars, $httpmethod) {
-        $this->wrap('/views/store/store_product.php', 'Products');
+        if ($httpmethod == 'GET') {
+            $P = new Products($vars['db']);
+            $vars['products'] = $P->get();
+            $vars['tags'] = $P->get_tags();
+            $this->wrap('/views/store/store_product.php', 'Products', $vars);
+        }
+    }
+
+    function product_details($vars, $httpmethod) {
+        if ($httpmethod == 'GET') {
+            $P = new Products($vars['db']);
+            $vars['products'] = $P->get();
+            $vars['product'] = $P->get($vars['id'])[0];
+            $vars['tags'] = $P->get_tags();
+            $this->wrap('/views/store/store_product_detail.php', 'Products - Detail', $vars);
+        } else {
+            $P = new Products($vars['db']);
+            $product = $P->get($vars['id'])[0];
+            header('Content-type: application/json');
+            echo json_encode($product);
+        }
     }
 
     function shopping_cart($vars, $httpmethod) {
-        $this->wrap('/views/store/store_shopping_cart.php', 'Your Cart');
+        $this->wrap('/views/store/store_shopping_cart.php', 'Your Cart', $vars);
     }
 
     function blog($vars, $httpmethod) {
-        $this->wrap('/views/store/store_blog.php', 'Blog');
+        $this->wrap('/views/store/store_blog.php', 'Blog', $vars);
     }
 
     function contact($vars, $httpmethod) {
         if ($httpmethod == 'GET') {
-            $this->wrap('/views/store/store_contact.php', 'Contact Us!');
+            $this->wrap('/views/store/store_contact.php', 'Contact Us!', $vars);
         } else {
             $data = array(
                 "email" => $_POST['email'],

@@ -38,6 +38,10 @@
                                 <textarea class="form-control" name="description"></textarea>
                             </div>
                             <div class="form-group">
+                                <label for="Tag">Tag</label>
+                                <input type="text" class="form-control" name="tag" placeholder="tag">
+                            </div>
+                            <div class="form-group">
                                 <label for="picture">Picture</label>
                                 <input type="file" name="picture" accept="image/jpeg, image/png">
                             </div>

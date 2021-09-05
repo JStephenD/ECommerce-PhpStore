@@ -268,9 +268,45 @@
     
     /*==================================================================
     [ Show modal1 ]*/
-    $('.js-show-modal1').on('click',function(e){
+    $('.js-show-modal1').on('click', function (e) {
         e.preventDefault();
-        $('.js-modal1').addClass('show-modal1');
+        let source = e.target || e.srcElement;
+        let url = source.href;
+
+        Swal.fire({
+            showConfirmButton: false,
+            showCancelButton: false,
+            showLoaderOnConfirm: true,
+            didOpen: async () => {
+                Swal.showLoading();
+
+                await fetch(url, {
+                    method: "POST",
+                })
+                    .then((response) => {
+                        response.json().then(json => {
+                            let imgurl = `/uploads/product_picture/${json.picture}`;
+                            $('.qv-data-thumb').data('thumb', imgurl);
+                            $('.qv-imgsrc').attr('src', imgurl);
+                            $('.qv-ahref').attr('href', imgurl);
+
+                            $('.qv-name').text(json.name);
+                            $('.qv-price').text(`₱${json.price}`);
+                            $('.qv-description').text(json.description);
+
+                            $('.js-modal1').addClass('show-modal1');
+                        });
+                    })
+                    .catch((error) => {
+                        Swal.showValidationMessage(`Request failed: ${error}`);
+                    });
+
+                Swal.clickConfirm();
+            },
+            backdrop: true,
+            allowOutsideClick: () => !Swal.isLoading(),
+        });
+
     });
 
     $('.js-hide-modal1').on('click',function(){
