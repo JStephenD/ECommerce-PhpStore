@@ -63,7 +63,7 @@
                 </a>
                 <ul class="treeview-menu">
                     <li><a href="/admin/products/list"><i class="fa fa-circle-o"></i> List Products</a></li>
-                    <li><a href="/admin/products"><i class="fa fa-circle-o"></i> Add Product</a></li>
+                    <li><a href="/admin/products/add"><i class="fa fa-circle-o"></i> Add Product</a></li>
                 </ul>
             </li>
             <?php if (isset($_SESSION['admin'])) { ?>
