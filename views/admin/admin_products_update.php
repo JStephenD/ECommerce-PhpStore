@@ -48,12 +48,12 @@
                                 <label for="picture">Picture</label>
                                 <input type="text" value="false" name="imageChanged" hidden>
                                 <input type="text" name="original_picture" value="<?= $product['picture']; ?>" hidden>
-                                <input type="file" name="picture" accept="image/jpeg, image/png" value="<?= $product['picture']; ?>">
+                                <input type="file" name="picture" class="form-control" accept="image/jpeg, image/png" value="<?= $product['picture']; ?>">
                                 <img src="<?= '/uploads/product_picture/' . $product['picture']; ?>" width="500" id="preview" />
                             </div>
                             <div class="form-group">
                                 <label for="category">Category</label>
-                                <select name="category_id" class="select">
+                                <select name="category_id" class="select form-control">
                                     <option selected disabled>Select Category</option>
                                     <?php
                                     foreach ($categories as $row) {  ?>
@@ -61,6 +61,24 @@
                                     <?php } ?>
                                 </select>
                             </div>
+
+                            <div class="form-group">
+                                <label for="category">Category</label>
+                                <select id="multi-tag" class="form-control" multiple="multiple">
+                                    <option selected="selected">orange</option>
+                                    <option>white</option>
+                                    <option selected="selected">purple</option>
+                                </select>
+                            </div>
+
+                            <script defer>
+                                document.addEventListener("DOMContentLoaded", function() {
+                                    $('#multi-tag').select2({
+                                        tags: true,
+                                        theme: "classic"
+                                    })
+                                });
+                            </script>
                         </div>
                         <!-- /.box-body -->
 

@@ -17,7 +17,7 @@
                             <div class="my-slick3 gallery-lb">
                                 <div class="item-slick3 qv-data-thumb" data-thumb="">
                                     <div class="wrap-pic-w pos-relative">
-                                        <img src="/images/product-detail-01.jpg" class="qv-imgsrc" alt="IMG-PRODUCT">
+                                        <img src="" class="qv-imgsrc" alt="IMG-PRODUCT">
 
                                         <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3
 													trans-04 qv-ahref" href="/images/product-detail-01.jpg">
@@ -32,6 +32,9 @@
 
                 <div class="col-md-6 col-lg-5 p-b-30">
                     <div class="p-r-50 p-t-5 p-lr-0-lg">
+                        <input type="number" class="js-product-id qv-id" value="0" hidden>
+
+
                         <h4 class="mtext-105 cl2 js-name-detail p-b-14 qv-name">
                             Lightweight Jacket
                         </h4>
@@ -54,7 +57,7 @@
                                             <i class="fs-16 zmdi zmdi-minus"></i>
                                         </div>
 
-                                        <input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product" value="1">
+                                        <input class="mtext-104 cl3 txt-center num-product qv-numOrder" type="number" name="num-product" value="1">
 
                                         <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
                                             <i class="fs-16 zmdi zmdi-plus"></i>

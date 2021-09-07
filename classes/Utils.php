@@ -30,4 +30,10 @@ class Utils {
 
         return $imgFileName;
     }
+
+    static function pprint($data) {
+        echo '<pre>';
+        var_dump($data);
+        echo '</pre>';
+    }
 }

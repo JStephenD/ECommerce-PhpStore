@@ -1884,6 +1884,9 @@ input.num-product::-webkit-inner-spin-button {
   visibility: hidden;
   opacity: 0;
 }
+.myswal2 {
+  z-index: 9001 !important;
+}
 
 .overlay-modal1 {
   position: fixed;
@@ -1922,8 +1925,8 @@ input.num-product::-webkit-inner-spin-button {
 }
 
 .table-shopping-cart .column-1 {
-  width: 133px;
-  padding-left: 50px;
+  width: 150px;
+  padding-left: 30px;
 }
 
 .table-shopping-cart .column-2 {
@@ -1943,7 +1946,7 @@ input.num-product::-webkit-inner-spin-button {
 
 .table-shopping-cart .column-5 {
   width: 172px;
-  padding-right: 50px;
+  padding-right: 30px;
   text-align: right;
   font-size: 16px;
 }

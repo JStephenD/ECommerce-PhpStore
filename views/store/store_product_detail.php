@@ -1,12 +1,12 @@
 <!-- breadcrumb -->
 <div class="container">
     <div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
-        <a href="index.html" class="stext-109 cl8 hov-cl1 trans-04">
+        <a href="/" class="stext-109 cl8 hov-cl1 trans-04">
             Home
             <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
         </a>
 
-        <a href="product.html" class="stext-109 cl8 hov-cl1 trans-04">
+        <a href="/product?cat=<?= $product['tag']; ?>" class="stext-109 cl8 hov-cl1 trans-04">
             <?= ucwords($product['tag']); ?>
             <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
         </a>
@@ -45,6 +45,8 @@
 
             <div class="col-md-6 col-lg-5 p-b-30">
                 <div class="p-r-50 p-t-5 p-lr-0-lg">
+                    <input type="number" class="js-product-id" value=<?= $product['id']; ?> hidden>
+
                     <h4 class="mtext-105 cl2 js-name-detail p-b-14">
                         <?= $product['name']; ?>
                     </h4>
@@ -238,7 +240,7 @@
                                     <!-- Review -->
                                     <div class="flex-w flex-t p-b-68">
                                         <div class="wrap-pic-s size-109 bor0 of-hidden m-r-18 m-t-6">
-                                            <img src="images/avatar-01.jpg" alt="AVATAR">
+                                            <img src="#" alt="AVATAR">
                                         </div>
 
                                         <div class="size-207">

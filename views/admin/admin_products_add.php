@@ -43,11 +43,11 @@
                             </div>
                             <div class="form-group">
                                 <label for="picture">Picture</label>
-                                <input type="file" name="picture" accept="image/jpeg, image/png">
+                                <input type="file" class="form-control" name="picture" accept="image/jpeg, image/png">
                             </div>
                             <div class="form-group">
                                 <label for="category">Category</label>
-                                <select name="category_id" class="select">
+                                <select name="category_id" class="select form-control">
                                     <option selected disabled>Select Category</option>
                                     <?php
                                     foreach ($categories as $row) {  ?>

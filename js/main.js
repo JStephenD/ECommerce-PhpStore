@@ -194,8 +194,67 @@
 
     /*==================================================================
     [ Cart ]*/
-    $('.js-show-cart').on('click',function(){
-        $('.js-panel-cart').addClass('show-header-cart');
+    $('.js-show-cart').on('click', async function () {
+        Swal.fire({
+            showConfirmButton: false,
+            showCancelButton: false,
+            customClass: {
+                container: 'myswal2'
+            },
+            didOpen: async () => {
+                Swal.showLoading();
+
+                await fetch('/cart/get', {
+                    method: 'GET'
+                }).then(response => {
+                    response.json().then(json => {
+                        let cart_wrap = document.querySelector('.header-cart-wrapitem');
+                        cart_wrap.innerHTML = '';
+                        let totalPriceWrap = document.querySelector('.header-cart-total');
+                        let totalPrice = 0.0;
+
+                        json.forEach(item => {
+                            let li = document.createElement("li");
+                            li.className = "header-cart-item flex-w flex-t m-b-12";
+
+                            let divimg = document.createElement("div");
+                            divimg.className = "header-cart-item-img";
+
+                            let img = document.createElement("img");
+                            img.src = `/uploads/product_picture/${item.picture}`;
+
+                            divimg.appendChild(img);
+                            li.appendChild(divimg);
+
+                            let divname = document.createElement("div");
+                            divname.className = "header-cart-item-txt p-t-8";
+
+                            let name = document.createElement("a");
+                            name.href = `/product/details.${item.id}`;
+                            name.className = "header-cart-item-name m-b-18 hov-cl1 trans-04";
+                            name.innerText = `${item.name}`;
+
+                            let orderDetail = document.createElement("span");
+                            orderDetail.className = "header-cart-item-info";
+                            orderDetail.innerText = `${item.numOrder} x ₱${item.price}`;
+
+                            divname.appendChild(name);
+                            divname.appendChild(orderDetail);
+                            li.appendChild(divname);
+
+                            cart_wrap.appendChild(li);
+                            totalPrice += (parseInt(item.numOrder) * parseFloat(item.price));
+                        });
+                        totalPriceWrap.innerText = `Total: ₱${totalPrice}`;
+
+                    });
+
+                    Swal.clickConfirm();
+                    $('.js-panel-cart').addClass('show-header-cart');
+                });
+
+            }
+        });
     });
 
     $('.js-hide-cart').on('click',function(){
@@ -216,7 +275,7 @@
     [ +/- num product ]*/
     $('.btn-num-product-down').on('click', function(){
         var numProduct = Number($(this).next().val());
-        if(numProduct > 0) $(this).next().val(numProduct - 1);
+        if (numProduct > 0) $(this).next().val(numProduct - 1);
     });
 
     $('.btn-num-product-up').on('click', function(){
@@ -276,7 +335,9 @@
         Swal.fire({
             showConfirmButton: false,
             showCancelButton: false,
-            showLoaderOnConfirm: true,
+            customClass: {
+                container: 'myswal2'
+            },
             didOpen: async () => {
                 Swal.showLoading();
 
@@ -284,13 +345,17 @@
                     method: "POST",
                 })
                     .then((response) => {
+                        Swal.clickConfirm();
+
                         response.json().then(json => {
                             let imgurl = `/uploads/product_picture/${json.picture}`;
                             $('.qv-data-thumb').data('thumb', imgurl);
                             $('.qv-imgsrc').attr('src', imgurl);
                             $('.qv-ahref').attr('href', imgurl);
 
+                            $('.qv-id').val(json.id);
                             $('.qv-name').text(json.name);
+                            $('.qv-numOrder').val(1);
                             $('.qv-price').text(`₱${json.price}`);
                             $('.qv-description').text(json.description);
 
@@ -301,7 +366,6 @@
                         Swal.showValidationMessage(`Request failed: ${error}`);
                     });
 
-                Swal.clickConfirm();
             },
             backdrop: true,
             allowOutsideClick: () => !Swal.isLoading(),
