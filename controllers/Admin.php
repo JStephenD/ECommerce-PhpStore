@@ -82,7 +82,7 @@ class Admin {
         if ($httpmethod == 'GET') {
             $id = $vars['id'];
             $P = new Products($vars['db']);
-            $vars['product'] = $P->get($id)[0];
+            $vars['product'] = $P->get($id);
             $this->wrap('/views/admin/admin_products_listitem.php', 'ADMIN - PRODUCT ITEM', $vars);
         } else {
         }
@@ -93,7 +93,7 @@ class Admin {
             $id = $vars['id'];
             $P = new Products($vars['db']);
             $C = new Categories($vars['db']);
-            $vars['product'] = $P->get($id)[0];
+            $vars['product'] = $P->get($id);
             $vars['categories'] = $C->get();
             $this->wrap('/views/admin/admin_products_update.php', 'ADMIN - UPDATE PRODUCT', $vars);
         } else {

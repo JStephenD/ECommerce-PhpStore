@@ -52,8 +52,8 @@
 							<a href="/product">Shop</a>
 						</li>
 
-						<li class="label1 <?= ($method == "shopping_cart") ? 'active-menu' : ''; ?>" data-label1="hot">
-							<a href="/cart">Features</a>
+						<li class="label1 <?= ($method == "show") ? 'active-menu' : ''; ?>" data-label1="hot">
+							<a href="/cart">Cart</a>
 						</li>
 
 						<li class="<?= ($method == "blog") ? 'active-menu' : ''; ?>">
@@ -67,6 +67,19 @@
 						<li class="<?= ($method == "contact") ? 'active-menu' : ''; ?>">
 							<a href="/contact">Contact</a>
 						</li>
+
+						<?php if (isset($_SESSION['customer'])) { ?>
+							<li>
+								<a href="/customer/logout">Logout</a>
+							</li>
+							<li>
+								<a href="#"><?= $_SESSION['customer']['username']; ?></a>
+							</li>
+						<?php } else { ?>
+							<li>
+								<a href="/customer">Login</a>
+							</li>
+						<?php } ?>
 					</ul>
 				</div>
 
@@ -173,7 +186,7 @@
 			</li>
 
 			<li>
-				<a href="/cart" class="label1 rs1" data-label1="hot">Features</a>
+				<a href="/cart" class="label1 rs1" data-label1="hot">Cart</a>
 			</li>
 
 			<li>
@@ -187,6 +200,20 @@
 			<li>
 				<a href="/contact">Contact</a>
 			</li>
+
+			<?php if (isset($_SESSION['customer'])) { ?>
+				<li>
+					<a href="/customer/logout">Logout</a>
+				</li>
+				<li>
+					<a href="#"><?= $_SESSION['customer']['username']; ?></a>
+				</li>
+			<?php } else { ?>
+				<li>
+					<a href="/customer">Login</a>
+				</li>
+			<?php } ?>
+
 		</ul>
 	</div>
 

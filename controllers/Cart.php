@@ -1,7 +1,5 @@
 <?php
 
-use function PHPSTORM_META\type;
-
 class Cart {
     function wrap($include_file, $title, $variables = []) {
 
@@ -36,7 +34,7 @@ class Cart {
             $cart = (isset($_SESSION['cart'])) ? $_SESSION['cart'] : [];
 
             foreach ($cart as &$item) {
-                $product = $P->get($item['id'])[0];
+                $product = $P->get($item['id']);
                 $item['name'] = $product['name'];
                 $item['price'] = $product['price'];
                 $item['description'] = $product['description'];
@@ -112,7 +110,7 @@ class Cart {
 
             $cart_details = [];
             foreach ($cart as $item) {
-                $product = $P->get($item['id'])[0];
+                $product = $P->get($item['id']);
 
                 $cart_details[] = [
                     "id" => $item['id'],
@@ -137,6 +135,62 @@ class Cart {
                 if ($v['id'] == $vars['id']) {
                     unset($cart[$k]);
                 }
+            }
+        }
+    }
+
+    function checkout($vars, $httpmethod) {
+        if ($httpmethod == 'POST') {
+            header('Content: application/json');
+
+            if (!isset($_SESSION['customer'])) {
+                echo json_encode(["result" => "Not logged in"]);
+            } else if (!isset($_SESSION['cart']) || empty($_SESSION['cart'])) {
+                echo json_encode(["result" => "Cart is empty"]);
+            } else if (empty($_POST['address'])) {
+                echo json_encode(["result" => "Address is empty"]);
+            } else if (empty($_POST['phone'])) {
+                echo json_encode(["result" => "Phone is empty"]);
+            } else {
+                $cart = $_SESSION['cart'];
+                $P = new Products($vars['db']);
+                $O = new Orders($vars['db']);
+                $OD = new OrderDetails($vars['db']);
+
+
+                $cart_details = [];
+                $total = 0.0;
+                foreach ($cart as $item) {
+                    $product = $P->get($item['id']);
+
+                    $cart_details[] = [
+                        "product_id" => $item['id'],
+                        "numOrder" => $item['numOrder'],
+                    ];
+                    $total += intval($item['numOrder']) * floatval($product['price']);
+                }
+
+                $order_data = [
+                    "customer_id" => intval($_SESSION['customer']['id']),
+                    "address" => $_POST['address'],
+                    "phone" => $_POST['phone'],
+                    "total" => $total
+                ];
+
+                $order_id = $O->add($order_data);
+
+                foreach ($cart_details as $item) {
+                    $order_detail_data = [
+                        "order_id" => $order_id,
+                        "product_id" => $item['product_id'],
+                        "quantity" => $item['numOrder']
+                    ];
+
+                    $order_detail_result = $OD->add($order_detail_data);
+                }
+
+                $_SESSION['cart'] = [];
+                echo json_encode(["result" => "success"]);
             }
         }
     }

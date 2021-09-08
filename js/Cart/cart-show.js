@@ -12,7 +12,7 @@ document.querySelector("#update-cart").addEventListener("click", async (ev) => {
         if (node.value == 0) {
             warn = "Some items will be removed";
         }
-    })
+    });
 
     Swal.fire({
         title: "Update Cart",
@@ -45,8 +45,6 @@ document.querySelector("#update-cart").addEventListener("click", async (ev) => {
                             with_orders.push(value.id);
                         });
 
-                        console.log(with_orders);
-
                         rows.forEach(row => {
                             let id = row.querySelector('.cs-id').value;
                             if (!with_orders.includes(id)) {
@@ -55,7 +53,7 @@ document.querySelector("#update-cart").addEventListener("click", async (ev) => {
                         });
 
                         compute_totals();
-                    })
+                    });
                 })
                 .catch((error) => {
                     Swal.showValidationMessage(`Request failed: ${error}`);
@@ -73,7 +71,7 @@ document.querySelector("#update-cart").addEventListener("click", async (ev) => {
             });
         }
     });
-})
+});
 
 document.querySelectorAll('.how-itemcart1').forEach(btn => {
     btn.addEventListener("click", async (ev) => {
@@ -131,7 +129,70 @@ document.querySelectorAll('.how-itemcart1').forEach(btn => {
             }
         });
     });
-})
+});
+
+document.querySelector('#checkout').addEventListener("click", async (ev) => {
+    ev.preventDefault();
+
+    Swal.fire({
+        showConfirmButton: false,
+        showCancelButton: false,
+        customClass: {
+            container: 'myswal2'
+        },
+        didOpen: async () => {
+            Swal.showLoading();
+
+            let form = document.querySelector('#form');
+            let formdata = new FormData(form);
+
+            await fetch(`${window.location.href}/checkout`, {
+                method: "POST",
+                body: formdata
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(response.statusText);
+                    }
+
+                    Swal.clickConfirm();
+
+                    response.json().then(json => {
+                        let result = json['result'];
+
+                        if (result == 'success') {
+                            Swal.fire({
+                                title: "Checked out",
+                                text: `Your order has been placed`,
+                                icon: "success",
+                                timer: 1000,
+                                timerProgressBar: true,
+                                customClass: {
+                                    container: 'myswal2'
+                                },
+                            });
+                            window.location.reload();
+                        } else {
+                            Swal.fire({
+                                title: result,
+                                icon: "warning",
+                                timer: 1000,
+                                timerProgressBar: true,
+                                customClass: {
+                                    container: 'myswal2'
+                                },
+                            });
+                        }
+                    });
+                })
+                .catch((error) => {
+                    Swal.showValidationMessage(`Request failed: ${error}`);
+                });
+        },
+        backdrop: true,
+        allowOutsideClick: () => !Swal.isLoading(),
+    });
+});
 
 
 function compute_totals() {
@@ -147,8 +208,6 @@ function compute_totals() {
         let quantity = node.querySelector('.cs-quantity').value;
 
         subtotal += parseFloat(price) * parseInt(quantity);
-
-        console.log(price, quantity, subtotal, total);
     });
     total = subtotal;
 

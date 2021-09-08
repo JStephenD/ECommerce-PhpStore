@@ -31,6 +31,7 @@ document.querySelector("#submit").addEventListener("click", async (ev) => {
                     Swal.showValidationMessage(`Request failed: ${error}`);
                 });
         },
+        backdrop: true,
         allowOutsideClick: () => !Swal.isLoading(),
     }).then((res) => {
         if (res.isConfirmed) {

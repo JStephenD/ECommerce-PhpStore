@@ -47,6 +47,12 @@ $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) 
 	$r->addRoute(['GET', 'POST'], '/cart', ['Cart', 'show']);
 	$r->addRoute(['GET', 'POST'], '/cart/update', ['Cart', 'update']);
 	$r->addRoute(['GET', 'POST'], '/cart/remove/{id}', ['Cart', 'remove']);
+	$r->addRoute(['GET', 'POST'], '/cart/checkout', ['Cart', 'checkout']);
+
+	$r->addRoute(['GET', 'POST'], '/customer', ['Customer', 'index']);
+	$r->addRoute(['GET', 'POST'], '/customer/login', ['Customer', 'login']);
+	$r->addRoute(['GET', 'POST'], '/customer/register', ['Customer', 'register']);
+	$r->addRoute(['GET', 'POST'], '/customer/logout', ['Customer', 'logout']);
 
 	$r->addRoute(['GET', 'POST'], '/admin', ['Admin', 'index']);
 	$r->addRoute(['GET', 'POST'], '/admin/login', ['Admin', 'login']);

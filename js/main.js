@@ -207,6 +207,10 @@
                 await fetch('/cart/get', {
                     method: 'GET'
                 }).then(response => {
+                    if (!response.ok) {
+                        throw new Error(response.statusText);
+                    }
+
                     response.json().then(json => {
                         let cart_wrap = document.querySelector('.header-cart-wrapitem');
                         cart_wrap.innerHTML = '';
@@ -251,6 +255,9 @@
 
                     Swal.clickConfirm();
                     $('.js-panel-cart').addClass('show-header-cart');
+
+                }).catch((error) => {
+                    Swal.showValidationMessage(`Request failed: ${error}`);
                 });
 
             }
@@ -344,7 +351,11 @@
                 await fetch(url, {
                     method: "POST",
                 })
-                    .then((response) => {
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(response.statusText);
+                        }
+
                         Swal.clickConfirm();
 
                         response.json().then(json => {

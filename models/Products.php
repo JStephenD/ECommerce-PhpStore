@@ -17,7 +17,7 @@ class Products {
                 SELECT * FROM $this->table WHERE id = :id"
             );
             $query->execute(['id' => $id]);
-            return $query->fetchAll(PDO::FETCH_ASSOC);
+            return $query->fetch(PDO::FETCH_ASSOC);
         }
     }
 

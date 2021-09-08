@@ -59,12 +59,12 @@ class Store {
         if ($httpmethod == 'GET') {
             $P = new Products($vars['db']);
             $vars['products'] = $P->get();
-            $vars['product'] = $P->get($vars['id'])[0];
+            $vars['product'] = $P->get($vars['id']);
             $vars['tags'] = $P->get_tags();
             $this->wrap('/views/store/store_product_detail.php', 'Products - Detail', $vars);
         } else {
             $P = new Products($vars['db']);
-            $product = $P->get($vars['id'])[0];
+            $product = $P->get($vars['id']);
             header('Content-type: application/json');
             echo json_encode($product);
         }
