@@ -62,14 +62,14 @@
                                 </select>
                             </div>
 
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                                 <label for="category">Category</label>
                                 <select id="multi-tag" class="form-control" multiple="multiple">
                                     <option selected="selected">orange</option>
                                     <option>white</option>
                                     <option selected="selected">purple</option>
                                 </select>
-                            </div>
+                            </div> -->
 
                             <script defer>
                                 document.addEventListener("DOMContentLoaded", function() {
